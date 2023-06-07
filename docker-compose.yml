@@ -9,9 +9,9 @@ services:
     env_file:
       - ./.env.db
     ports:
-      - '5443:5432'
-    # volumes:
-    #   - ~/psql-grafana/pgdata:/var/lib/postgresql/data
+      - 5443:5432
+    volumes:
+      - ~/grafana-psql/pgdata:/var/lib/postgresql/data
 
   grafana:
     container_name: grafana
@@ -23,6 +23,6 @@ services:
     env_file:
       - ./.env
     volumes:
-      # - ~/psql-grafana/grafana:/var/lib/grafana
+      - ~/grafana-psql/grafana:/var/lib/grafana
       - ./volumes/grafana/provisioning/:/etc/grafana/provisioning/
       - ./volumes/grafana/grafana.ini:/etc/grafana/grafana.ini
