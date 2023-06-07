@@ -28,5 +28,5 @@ ORDER BY created_at
 ```
 
 ## Stack used
-* MongoDB
+* PostgreSQL
 * Grafana
