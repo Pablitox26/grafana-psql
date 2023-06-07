@@ -1,0 +1,24 @@
+# config file version
+apiVersion: 1
+
+# list of datasources to insert/update depending
+# whats available in the database
+datasources:
+  # <string, required> name of the datasource. Required
+- name: Postgres
+  type: postgres
+  url: psql-db:5432
+  user: $POSTGRES_USER # <--- your `Username`
+  secureJsonData:
+    password: $POSTGRES_PASSWORD # <--- your `password`
+  jsonData:
+    database: $POSTGRES_DB # <--- your `database`
+    sslmode: "disable" # disable/require/verify-ca/verify-full
+    maxOpenConns: 0         # Grafana v5.4+
+    maxIdleConns: 2         # Grafana v5.4+
+    connMaxLifetime: 14400  # Grafana v5.4+
+    postgresVersion: 903 # 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10
+    timescaledb: false
+
+# https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources
+# https://grafana.com/docs/grafana/latest/datasources/postgres/

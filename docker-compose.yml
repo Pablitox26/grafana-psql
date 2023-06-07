@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+
+  psql-db:
+    container_name: psql-db
+    image: postgres:13.1-alpine
+    restart: unless-stopped
+    env_file:
+      - ./.env.db
+    ports:
+      - '5443:5432'
+    # volumes:
+    #   - ~/psql-grafana/pgdata:/var/lib/postgresql/data
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    user: "$UID:$GID"
+    ports:
+      - ${GF_PORT}:3000
+    env_file:
+      - ./.env
+    volumes:
+      # - ~/psql-grafana/grafana:/var/lib/grafana
+      - ./volumes/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./volumes/grafana/grafana.ini:/etc/grafana/grafana.ini
